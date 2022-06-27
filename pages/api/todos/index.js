@@ -52,7 +52,19 @@ export default async (req, res) => {
 
       console.log(session.user.email)
       console.log('fetching todos complete');
+
       console.log(todos);
+
+      let totalCount = 0;
+      let completedCount = 0;
+      for(let i = 0; i < todos.length; i++) {
+        totalCount++;
+        if(todos[i].completed) {
+          completedCount++;
+        }
+      }
+      console.log(totalCount);
+      console.log(completedCount);
 
       res.status(200).json(todos);
       break;
@@ -67,6 +79,7 @@ export default async (req, res) => {
         email: session.user.email,
       });
 
+      
       console.log('posting todo complete');
 
       res.status(201).json(todo);

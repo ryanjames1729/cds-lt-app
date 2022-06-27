@@ -113,7 +113,25 @@ function TodoList({ items = [], onNewTodo, onUpdateTodo, onDeleteTodo }) {
     setnewTodoDescription('');
   };
 
+  let totalCount = 0;
+  let completedCount = 0;
+  for(let i = 0; i < items.length; i++) {
+    totalCount++;
+    if(items[i].completed) {
+      completedCount++;
+    }
+  }
+  let progress = completedCount / totalCount * 100;
+
   return (
+    <>
+    <div className="h-1 w-full bg-gray-300">
+      <div
+        style={{ width: progress > 0 ? `${progress}%` : '2%' }}
+        className="h-full bg-blue-500"
+      >
+      </div>
+    </div>
     <div className="bg-white rounded">
       <ul className="rounded divide-y divide-gray-200 border border-gray-200 overflow-hidden">
         {items.map((todo) => (
@@ -144,6 +162,7 @@ function TodoList({ items = [], onNewTodo, onUpdateTodo, onDeleteTodo }) {
         </div>
       </ul>
     </div>
+    </>
   );
 }
 
