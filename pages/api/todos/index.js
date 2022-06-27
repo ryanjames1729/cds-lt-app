@@ -4,8 +4,8 @@ import { getSession } from 'next-auth/react';
 import { graphcmsClient } from '../../../lib/graphcms';
 
 export const GetAllTodosByUser = gql`
-  query GetAllTodosByUser($userId: ID!) {
-    todos(where: { nextAuthUser: { id: $userId } }, orderBy: createdAt_ASC) {
+  query GetAllTodosByUser($email: String!) {
+    todos(where: { nextAuthUser: { email: $email } }, stage: DRAFT, orderBy: createdAt_ASC) {
       id
       description
       completed
@@ -17,13 +17,13 @@ const CreateNewTodoForUser = gql`
   mutation CreateNewTodoForUser(
     $description: String!
     $completed: Boolean
-    $userId: ID!
+    $email: String!
   ) {
     todo: createTodo(
       data: {
         description: $description
         completed: $completed
-        nextAuthUser: { connect: { id: $userId } }
+        nextAuthUser: { connect: { email: $email } }
       }
     ) {
       id
@@ -35,8 +35,10 @@ const CreateNewTodoForUser = gql`
 
 export default async (req, res) => {
   const session = await getSession({ req });
+  console.log(session)
+ 
 
-  if (!session) {
+  if (!session) { 
     res.status(401).send({
       error: 'Unauthorized',
     });
@@ -45,8 +47,12 @@ export default async (req, res) => {
   switch (req.method.toLowerCase()) {
     case 'get': {
       const { todos } = await graphcmsClient.request(GetAllTodosByUser, {
-        userId: session.userId,
+        email: session.user.email,
       });
+
+      console.log(session.user.email)
+      console.log('fetching todos complete');
+      console.log(todos);
 
       res.status(200).json(todos);
       break;
@@ -58,8 +64,10 @@ export default async (req, res) => {
       const { todo } = await graphcmsClient.request(CreateNewTodoForUser, {
         description,
         completed,
-        userId: session.userId,
+        email: session.user.email,
       });
+
+      console.log('posting todo complete');
 
       res.status(201).json(todo);
       break;

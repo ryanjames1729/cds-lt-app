@@ -4,8 +4,8 @@ import { getSession } from 'next-auth/react';
 import { graphcmsClient } from '../../lib/graphcms';
 
 const UpdateNextAuthUser = gql`
-  mutation UpdateNextAuthUser($userId: ID!, $bio: String) {
-    user: updateNextAuthUser(data: { bio: $bio }, where: { id: $userId }) {
+  mutation UpdateNextAuthUser($email: String!, $bio: String) {
+    user: updateNextAuthUser(data: { bio: $bio }, where: { email: $email }) {
       id
       email
       bio
@@ -20,7 +20,7 @@ export default async (req, res) => {
     const { bio } = JSON.parse(req.body);
 
     const { user } = await graphcmsClient.request(UpdateNextAuthUser, {
-      userId: session.userId,
+      email: session.user.email,
       bio,
     });
 

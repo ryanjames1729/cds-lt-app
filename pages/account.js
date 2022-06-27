@@ -6,8 +6,8 @@ import { graphcmsClient } from '../lib/graphcms';
 import Header from '../components/header';
 
 const GetUserProfileById = gql`
-  query GetUserProfileById($id: ID!) {
-    user: nextAuthUser(where: { id: $id }) {
+  query GetUserProfileById($email: String!) {
+    user: nextAuthUser(where: { email: $email }) {
       email
       bio
     }
@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
   }
 
   const { user } = await graphcmsClient.request(GetUserProfileById, {
-    id: session.userId,
+    email: session.user.email,
   });
 
   return {

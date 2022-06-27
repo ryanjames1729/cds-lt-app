@@ -8,14 +8,14 @@ const UpdateTodoById = gql`
     $id: ID!
     $description: String
     $completed: Boolean
-    $userId: ID!
+    $email: String!
   ) {
     todo: updateTodo(
       where: { id: $id }
       data: {
         description: $description
         completed: $completed
-        nextAuthUser: { connect: { id: $userId } }
+        nextAuthUser: { connect: { email: $email } }
       }
     ) {
       id
@@ -53,7 +53,7 @@ export default async (req, res) => {
         id,
         description,
         completed,
-        userId: session.userId,
+        email: session.user.email,
       });
 
       res.status(200).json(todo);
