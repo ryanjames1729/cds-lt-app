@@ -170,6 +170,7 @@ export default function Todos({category}) {
   
 
   const { data } = useSWR('/api/todos', jsonFetcher);
+  let mutatedData;
 
   if (!data) {
     return <p>Fetching todos from GraphCMS...</p>;
@@ -267,19 +268,28 @@ export default function Todos({category}) {
     }
   };
 
-  if(category){
-    for(let i = 0; i < data.length; i++) {
-      if(!(data[i].category === category)) {
-        console.log('doesnt match ' + data[i].category + ' ' + category);
-        data.splice(i, 1);
-        i--;
+  if(data){
+    console.log('Found data!')
+    console.log('Todo data before: ' + data);
+    mutatedData = data.slice();
+    if(category){
+      console.log('Found category!')
+      
+      for(let i = 0; i < mutatedData.length; i++) {
+        if(!(mutatedData[i].category === category)) {
+          console.log('doesnt match ' + mutatedData[i].category + ' ' + category);
+          mutatedData.splice(i, 1);
+          i--;
+        }
       }
     }
+    console.log('Todo data after: ' + mutatedData);
   }
-  console.log(data);
+  
+  
   return (
     <TodoList
-      items={data}
+      items={mutatedData ? mutatedData : data}
       onNewTodo={addTodo}
       onDeleteTodo={removeTodo}
       onUpdateTodo={updateTodo}
