@@ -9,6 +9,7 @@ export const GetAllTodosByUser = gql`
       id
       description
       completed
+      category
     }
   }
 `;
@@ -18,24 +19,27 @@ const CreateNewTodoForUser = gql`
     $description: String!
     $completed: Boolean
     $email: String!
+    $category: String!
   ) {
     todo: createTodo(
       data: {
         description: $description
         completed: $completed
+        category: $category
         nextAuthUser: { connect: { email: $email } }
       }
     ) {
       id
       description
       completed
+      category
     }
   }
 `;
 
 export default async (req, res) => {
   const session = await getSession({ req });
-  console.log(session)
+  
  
 
   if (!session) { 
@@ -50,10 +54,7 @@ export default async (req, res) => {
         email: session.user.email,
       });
 
-      console.log(session.user.email)
-      console.log('fetching todos complete');
-
-      console.log(todos);
+      
 
       let totalCount = 0;
       let completedCount = 0;
@@ -63,20 +64,25 @@ export default async (req, res) => {
           completedCount++;
         }
       }
-      console.log(totalCount);
-      console.log(completedCount);
+      
 
       res.status(200).json(todos);
       break;
     }
 
     case 'post': {
+      
       const { description, completed } = req.body;
+
+      console.log(req.body)
+
+      let category = 'A1';
 
       const { todo } = await graphcmsClient.request(CreateNewTodoForUser, {
         description,
         completed,
         email: session.user.email,
+        category,
       });
 
       

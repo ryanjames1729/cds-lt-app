@@ -125,10 +125,10 @@ function TodoList({ items = [], onNewTodo, onUpdateTodo, onDeleteTodo }) {
 
   return (
     <>
-    <div className="h-1 w-full bg-gray-300">
+    <div className="h-2 w-full bg-gray-300 rounded-lg">
       <div
         style={{ width: progress > 0 ? `${progress}%` : '2%' }}
-        className="h-full bg-blue-500"
+        className="h-full bg-blue-500 rounded-lg"
       >
       </div>
     </div>
@@ -166,7 +166,9 @@ function TodoList({ items = [], onNewTodo, onUpdateTodo, onDeleteTodo }) {
   );
 }
 
-export default function Todos() {
+export default function Todos({category}) {
+  
+
   const { data } = useSWR('/api/todos', jsonFetcher);
 
   if (!data) {
@@ -178,16 +180,19 @@ export default function Todos() {
       id: Math.random(),
       description,
       completed: false,
+      category,
     };
 
     mutate('/api/todos', [...data, optimisticItem], false);
+
+    console.log('Todos ' + category)
 
     const response = await fetch('/api/todos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ description, completed: false }),
+      body: JSON.stringify({ description, completed: false, category }),
     });
 
     if (!response.ok) {
@@ -262,6 +267,16 @@ export default function Todos() {
     }
   };
 
+  if(category){
+    for(let i = 0; i < data.length; i++) {
+      if(!(data[i].category === category)) {
+        console.log('doesnt match ' + data[i].category + ' ' + category);
+        data.splice(i, 1);
+        i--;
+      }
+    }
+  }
+  console.log(data);
   return (
     <TodoList
       items={data}

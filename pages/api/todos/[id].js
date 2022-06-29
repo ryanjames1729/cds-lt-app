@@ -9,6 +9,7 @@ const UpdateTodoById = gql`
     $description: String
     $completed: Boolean
     $email: String!
+    $category: String!
   ) {
     todo: updateTodo(
       where: { id: $id }
@@ -21,6 +22,7 @@ const UpdateTodoById = gql`
       id
       description
       completed
+      category
     }
   }
 `;
@@ -54,6 +56,7 @@ export default async (req, res) => {
         description,
         completed,
         email: session.user.email,
+        category,
       });
 
       res.status(200).json(todo);

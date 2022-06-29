@@ -1,7 +1,9 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { gql } from 'graphql-request';
 import Link from 'next/link';
 
-export default function Header() {
+
+export default function Header({titles}) {
   const { data: session, status } = useSession();
 
   const loading = status === 'loading';
@@ -19,6 +21,18 @@ export default function Header() {
           <div className="space-x-3">
             <Link href="/account">
               <a>My Account</a>
+            </Link>
+            <Link href="/class_a1">
+              <a>{titles ? titles[0] : 'Class - A1'}</a>
+            </Link>
+            <Link href="/class_b2">
+              <a>{titles ? titles[1] : 'Class - B2'}</a>
+            </Link>
+            <Link href="/class_c3">
+              <a>{titles ? titles[2] : 'Class - C3'}</a>
+            </Link>
+            <Link href="/class_d4">
+              <a>{titles ? titles[3] : 'Class - D4'}</a>
             </Link>
             <button onClick={signOut}>Sign out</button>
           </div>
