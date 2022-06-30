@@ -5,6 +5,7 @@ import useSWR, { mutate } from 'swr';
 import { getSession } from 'next-auth/react';
 import { graphcmsClient } from '../lib/graphcms';
 import Header from '../components/header';
+import Link from 'next/link'
 
 const GetUserProfileById = gql`
   query GetUserProfileById($email: String!) {
@@ -176,6 +177,9 @@ export default function AccountPage({ user }) {
           </div>
         </form>
       </div>
+      <p className="p-2">
+        Need some help here? Check out the <Link href="/docs"><a><span className="text-blue-800 hover:underline">app documentation</span></a></Link> to answer your questions.
+      </p>
     </div>
   );
 }
