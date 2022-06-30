@@ -20,25 +20,25 @@ export default function Header({titles}) {
         {session ? (
           <div className="space-x-3">
             <Link href="/account">
-              <a>My Account</a>
+              <a>Settings</a>
             </Link>
             <Link href="/class_a1">
-              <a>{titles ? titles[0] : 'Class - A1'}</a>
+              <a>{titles ? titles[0] : 'Class A'}</a>
             </Link>
             <Link href="/class_b2">
-              <a>{titles ? titles[1] : 'Class - B2'}</a>
+              <a className={!titles ? "" : titles[1] == 'hide' ? "hidden" : ""}>{titles ? titles[1] : 'Class B'}</a>
             </Link>
             <Link href="/class_c3">
-              <a>{titles ? titles[2] : 'Class - C3'}</a>
+              <a className={!titles ? "" : titles[2] == 'hide' ? "hidden" : ""}>{titles ? titles[2] : 'Class C'}</a>
             </Link>
             <Link href="/class_d4">
-              <a>{titles ? titles[3] : 'Class - D4'}</a>
+              <a className={!titles ? "" : titles[3] == 'hide' ? "hidden" : ""}>{titles ? titles[3] : 'Class D'}</a>
             </Link>
             <button onClick={signOut}>Sign out</button>
           </div>
         ) : (
           <>
-            <button onClick={signIn}>Sign in</button>
+            <button onClick={() => signIn('google')}>Sign in</button>
           </>
         )}
       </div>

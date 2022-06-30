@@ -73,7 +73,7 @@ export default function AccountPage({ user }) {
   };
 
   return (
-    <div>
+    <div className="bgImage">
       <Header titles={[user.classA1, user.classB2, user.classC3, user.classD4]}/>
 
       <div className="max-w-3xl mx-auto px-6 space-y-6">
@@ -84,7 +84,7 @@ export default function AccountPage({ user }) {
           className="bg-white rounded p-4 border border-gray-200 space-y-3"
         >
           <div className="space-y-3">
-            <label htmlFor="bio" className="text-purple-500 font-medium mb-3">
+            <label htmlFor="classA1" className="text-purple-500 font-medium mb-3">
               First Class - A1
             </label>
             <div>
@@ -100,16 +100,16 @@ export default function AccountPage({ user }) {
             </div>
           </div>
           <div className="space-y-3">
-            <label htmlFor="classA1" className="text-purple-500 font-medium mb-3">
+            <label htmlFor="classB2" className="text-purple-500 font-medium mb-3">
               Second Class - B2
             </label>
             <div>
               <textarea
-                name="classA1"
+                name="classB2"
                 value={classB2}
                 onChange={(e) => setClassB2(e.target.value)}
-                placeholder="First Class"
-                id="classA1"
+                placeholder="Second Class; use the word 'hide' if no class needed"
+                id="classB2"
                 rows={1}
                 className="shadow-sm block w-full border-gray-200 rounded-md"
               />
@@ -124,7 +124,7 @@ export default function AccountPage({ user }) {
                 name="classC3"
                 value={classC3}
                 onChange={(e) => setClassC3(e.target.value)}
-                placeholder="Third Class"
+                placeholder="Third Class; use the word 'hide' if no class needed"
                 id="classC3"
                 rows={1}
                 className="shadow-sm block w-full border-gray-200 rounded-md"
@@ -140,7 +140,7 @@ export default function AccountPage({ user }) {
                 name="classD4"
                 value={classD4}
                 onChange={(e) => setClassD4(e.target.value)}
-                placeholder="Fourth Class"
+                placeholder="Fourth Class; use the word 'hide' if no class needed"
                 id="classD4"
                 rows={1}
                 className="shadow-sm block w-full border-gray-200 rounded-md"
@@ -151,7 +151,7 @@ export default function AccountPage({ user }) {
 
           <div className="space-y-3">
             <label htmlFor="bio" className="text-purple-500 font-medium mb-3">
-              Bio
+              Teaching Notes
             </label>
 
             <div>
@@ -159,7 +159,7 @@ export default function AccountPage({ user }) {
                 name="bio"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                placeholder="Short bio"
+                placeholder="Use this space for any notes about your classes."
                 id="bio"
                 rows={7}
                 className="shadow-sm block w-full border-gray-200 rounded-md"
