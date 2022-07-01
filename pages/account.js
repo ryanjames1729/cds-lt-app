@@ -65,17 +65,20 @@ export default function AccountPage({ user }) {
         body: JSON.stringify({ bio, classA1, classB2, classC3, classD4 }),
       });
 
+    
       if (!res.ok) {
         throw new Error(res.statusText);
       }
     } catch (err) {
       console.log(err);
     }
+
+    
   };
 
   return (
     <div className="bgImage">
-      <Header titles={[user.classA1, user.classB2, user.classC3, user.classD4]}/>
+      <Header titles={[classA1, classB2, classC3, classD4]}/>
 
       <div className="max-w-3xl mx-auto px-6 space-y-6">
         <h1 className="text-3xl font-bold">My Account</h1>
