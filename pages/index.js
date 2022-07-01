@@ -10,22 +10,35 @@ export default function IndexPage() {
 
   return (
     <>
-    <div>
+    <div className="md:h-screen">
       <Header />
 
-      <div className="max-w-3xl mx-auto px-6 space-y-6">
-        <div className="flex flex-row justify-center">
-        <Image src="/cds_logo.png" alt="logo" width={200} height={200} />
+      <div className="max-w-3xl mx-auto px-4 space-y-6">
+        {/* <div className="flex flex-row justify-center"> */}
+        <div className="grid grid-col">
+          <div className="grid grid-row justify-center">
+            <div className="grid grid-row justify-center">
+              <Image src="/cds_logo.png" alt="logo" width={200} height={200} />
+            </div>
+            {data ? <><h1 className="text-2xl md:text-4xl text-blue-800 py-2 font-bold">All your learning targets</h1></> : <><h1 className="text-2xl md:text-6xl font-bold text-blue-800 py-4">
+            Teach with your <span
+              className="text-2xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-red-800"
+            >
+              learning targets
+            </span>.
+          </h1></> }
+          
+          {data ? <Todos /> : <p>Login to get started.</p>}
+          </div>
         </div>
-        <h1 className="text-3xl font-bold">My Learning Targets</h1>
-        {data ? <Todos /> : <p>Login to manage your LTs</p>}
       </div>
-    </div>
-    <div>
-      <p className="p-2">
+      <div>
+      <p className={data ? "hidden" : "p-2 absolute bottom-0"}>
         Need some help here? Check out the <Link href="/docs"><a><span className="text-blue-800 hover:underline">app documentation</span></a></Link> to answer your questions.
       </p>
     </div>
+    </div>
+   
     </>
   );
 }
