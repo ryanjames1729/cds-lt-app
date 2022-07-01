@@ -53,7 +53,6 @@ export default function IndexPage({ user }) {
   return (
     <div>
       <Header titles={[user.classA1, user.classB2, user.classC3, user.classD4]}/>
-
       <div className="max-w-3xl mx-auto px-6 space-y-6">
         <div className="flex flex-row justify-center">
         <Image src="/cds_logo.png" alt="logo" width={200} height={200} />

@@ -4,13 +4,13 @@ import Image from 'next/image'
 import Header from '../components/header';
 import Todos from '../components/todos';
 
+
 export default function IndexPage() {
   const { data } = useSession();
 
   return (
     <div>
-      <Header />
-
+      <Header titles={['','','','']}/>
       <div className="max-w-3xl mx-auto px-6 space-y-6">
         <div className="flex flex-row justify-center">
         <Image src="/cds_logo.png" alt="logo" width={200} height={200} />
@@ -48,5 +48,6 @@ export default function IndexPage() {
         </div>
       </div>
     </div>
+    
   );
 }
