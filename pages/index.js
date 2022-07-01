@@ -8,50 +8,50 @@ import Link from 'next/link'
 import Header from '../components/header';
 import Todos from '../components/todos';
 
-const GetUserProfileById = gql`
-  query GetUserProfileById($email: String!) {
-    user: nextAuthUser(where: { email: $email }, stage: DRAFT) {
-      email
-      bio
-      classA1
-      classB2
-      classC3
-      classD4
-    }
-  }
-`;
+// const GetUserProfileById = gql`
+//   query GetUserProfileById($email: String!) {
+//     user: nextAuthUser(where: { email: $email }, stage: DRAFT) {
+//       email
+//       bio
+//       classA1
+//       classB2
+//       classC3
+//       classD4
+//     }
+//   }
+// `;
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context) {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     };
+//   }
 
 
-  const { user } = await graphcmsClient.request(GetUserProfileById, {
-    email: session.user.email,
-  });
+//   const { user } = await graphcmsClient.request(GetUserProfileById, {
+//     email: session.user.email,
+//   });
 
-  return {
-    props: {
-      user
-    },
-  };
-}
+//   return {
+//     props: {
+//       user
+//     },
+//   };
+// }
 
-export default function IndexPage({ user }) {
+export default function IndexPage() {
   const { data } = useSession();
 
   return (
     <>
     <div className="md:h-screen">
-      <Header titles={[user.classA1, user.classB2, user.classC3, user.classD4]}/>
+      <Header titles={['','','','']}/>
       <div className="max-w-3xl mx-auto px-4 space-y-6">
         {/* <div className="flex flex-row justify-center"> */}
         <div className="grid grid-col">
