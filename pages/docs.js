@@ -20,23 +20,47 @@ export default function IndexPage() {
         <div className="w-full p-2 border-2 border-black rounded shadow-lg bg-white mt-2 mb-1">
             <h2 className="text-2xl font-bold">Sign In To Your Account</h2>
             <p>
-                To sign in, simply click the Sign In button at the top right. This app uses Google Single Sign On. 
+                To sign in, simply click the Sign In button at the top right. 
+            </p>
+            <div className="flex flex-row justify-center">
+                <Image src="/docs_signin-button.png" alt="Sign In Button" width={125} height={125} />
+            </div>
+            <p>
+                This app uses Google Single Sign On. 
                 Once you click the Sign On, you will be prompted for your Google Account credentials and then you
                 will be signed in to the app. There is no need to remember any user names or passwords. 
             </p>
+            <div className="flex flex-row justify-center">
+                <Image src="/docs_signin-google.png" alt="Sign In Button" width={200} height={200} />
+            </div>
         </div>
         <div className="w-full p-2 border-2 border-black rounded shadow-lg bg-white mt-1 mb-1">
             <h2 className="text-2xl font-bold">Changing Your Settings</h2>
+            <div className="flex flex-row justify-center">
+                <Image src="/docs_settings-blank.png" alt="Your Account Settings" width={300} height={250} />
+            </div>
             <p>
                 The first time you sign in, your account will be set up with default settings. The default class names
                 are 'Class A', 'Class B', 'Class C', and 'Class D'. You can change these class names in the Settings menu.
                 Each account is set up with the ability to have learning targets for 1 to 4 classes. If you do not teach 4
-                classes, then you can use the keyword 'hide' to hide a class. You can also do this if you wan to temporarily
+                classes, then you can use the keyword 'hide' to hide a class. 
+            </p>
+            <div className="flex flex-row justify-center">
+                <Image src="/docs_settings-hide.png" alt="Your Account Settings" width={300} height={250} />
+            </div>
+            <p>
+                You can also do this if you wan to temporarily
                 hide a class. This does not delete any of the data in your lists.
             </p>
+            <div className="flex flex-row justify-center">
+                <Image src="/docs_settings-nav.png" alt="Your Account Settings" width={300} height={170} />
+            </div>
         </div>
         <div className="w-full p-2 border-2 border-black rounded shadow-lg bg-white mt-1 mb-1">
             <h2 className="text-2xl font-bold">Using Learning Targets</h2>
+            <div className="flex flex-row justify-center">
+                <Image src="/docs_list.png" alt="Your Account Settings" width={300} height={200} />
+            </div>
             <p>
                 Each class is equipped with a list modeled after a To Do list model. You can add as many items to your list 
                 as you want for each class. When you check off an item off the list, you will notice the progress bar at the
