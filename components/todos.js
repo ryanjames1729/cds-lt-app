@@ -22,6 +22,7 @@ function UpdateItemForm({ todo, onSubmit }) {
     onSubmit({
       completed: currentTodoCompleted,
       description: currentTodoDescription,
+      category: todo.category,
     });
   };
 
@@ -181,7 +182,7 @@ export default function Todos({category}) {
       id: Math.random(),
       description,
       completed: false,
-      category,
+      category: category,
     };
 
     mutate('/api/todos', [...data, optimisticItem], false);

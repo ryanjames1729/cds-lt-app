@@ -9,7 +9,7 @@ const UpdateTodoById = gql`
     $description: String
     $completed: Boolean
     $email: String!
-    $category: String!
+
   ) {
     todo: updateTodo(
       where: { id: $id }
@@ -17,6 +17,7 @@ const UpdateTodoById = gql`
         description: $description
         completed: $completed
         nextAuthUser: { connect: { email: $email } }
+
       }
     ) {
       id
@@ -47,7 +48,7 @@ export default async (req, res) => {
   switch (req.method.toLowerCase()) {
     case 'patch': {
       const { id } = req.query;
-      const { description, completed } = req.body;
+      const { description, completed, category } = req.body;
 
       // Check is owner?
 
@@ -56,7 +57,7 @@ export default async (req, res) => {
         description,
         completed,
         email: session.user.email,
-        category,
+        category: category,
       });
 
       res.status(200).json(todo);
