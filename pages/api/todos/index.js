@@ -72,11 +72,12 @@ export default async (req, res) => {
 
     case 'post': {
       
-      const { description, completed } = req.body;
+      const { description, completed, category } = req.body;
 
+      console.log('posting req.body:')
       console.log(req.body)
 
-      let category = 'A1';
+      // let category = 'A1';
 
       const { todo } = await graphcmsClient.request(CreateNewTodoForUser, {
         description,
